@@ -10,7 +10,7 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-php composer.phar require --prefer-dist mcms/yii2-x-editable "*"
+php composer.phar require --prefer-dist marciocamello/yii2-x-editable "*"
 ```
 
 or add
@@ -28,4 +28,4 @@ Usage
 Once the extension is installed, simply use it in your code by  :
 
 ```php
-<?= \mcms\xeditable\AutoloadExample::widget(); ?>```
+<?= \marciocamello\xeditable\AutoloadExample::widget(); ?>```
