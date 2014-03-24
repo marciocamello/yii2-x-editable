@@ -10,6 +10,9 @@
             "email": "marciocamello@outlook.com"
         }
     ],
+    "require": {
+        "yiisoft/yii2": "*"
+    },
     "autoload": {
             "psr-4": {
             "mcms\\xeditable\\": ""
