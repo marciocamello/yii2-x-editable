@@ -16,7 +16,7 @@ php composer.phar require --prefer-dist marciocamello/yii2-x-editable "*"
 or add
 
 ```
-"mcms/yii2-x-editable": "*"
+"marciocamello/yii2-x-editable": "*"
 ```
 
 to the require section of your `composer.json` file.
