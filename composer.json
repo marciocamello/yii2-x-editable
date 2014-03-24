@@ -15,9 +15,5 @@
         "psr-4": {
             "marciocamello\\xeditable\\": ""
         }
-    },
-    "minimum-stability": "dev",
-    "require": {
-        "yiisoft/yii2": "*"
     }
 }
