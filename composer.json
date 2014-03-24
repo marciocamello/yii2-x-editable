@@ -1,5 +1,5 @@
 {
-    "name": "mcms/yii2-x-editable",
+    "name": "marciocamello/yii2-x-editable",
     "description": "X-editable extensions for Yii 2, based in X-editable with Bootstrap",
     "type": "yii2-extension",
     "keywords": ["yii2","extension","mcms","x-editable"],
@@ -12,7 +12,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "mcms\\xeditable\\": ""
+            "marciocamello\\xeditable\\": ""
         }
     }
 }
