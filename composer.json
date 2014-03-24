@@ -1,0 +1,18 @@
+{
+    "name": "mcms/yii2-x-editable",
+    "description": "X-editable extensions for Yii 2, based in X-editable with Bootstrap",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension","mcms","x-editable"],
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "MarcioCamello",
+            "email": "marciocamello@outlook.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "mcms\\xeditable\\": ""
+        }
+    }
+}
