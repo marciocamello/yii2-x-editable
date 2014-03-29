@@ -7,8 +7,6 @@
 namespace mcms\xeditable;
 
 use yii\web\AssetBundle;
-use yii\web\View;
-
 
 \Yii::setAlias('@xeditable', dirname(__FILE__));
 
@@ -21,11 +19,11 @@ class XEditableAsset extends AssetBundle
     public $sourcePath = '@xeditable/assets/';
 
     public $js = [
-        "x-editable/dist/bootstrap3-editable/js/bootstrap-editable.min.js"
+        "x-editable/bootstrap3-editable/js/bootstrap-editable.min.js"
     ];
 
     public $css = [
-        "x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css"
+        "x-editable/bootstrap3-editable/css/bootstrap-editable.css"
     ];
 
     public $publishOptions = [

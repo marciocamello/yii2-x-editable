@@ -13,7 +13,11 @@ use yii\helpers\Json;
 
 class XEditableColumn extends DataColumn
 {
-	public $mode = 'inline';
+	/**
+	 * @var array defaults for editable configuration
+	 */
+	public $pluginOptions = [];
+
 	public $dataType = 'text';
 	public $pk='id';
 	public $dataTitle = '';
@@ -61,9 +65,20 @@ class XEditableColumn extends DataColumn
 	 */
 	public function registerAssets()
 	{
+		$config = new XEditableConfig();
+
+		if(isset($this->pluginOptions['mode']) && is_array($this->pluginOptions)){
+			$config->mode = $this->pluginOptions['mode'];
+		}
+
+		if(isset($this->pluginOptions['form']) && is_array($this->pluginOptions)){
+			$config->form = $this->pluginOptions['form'];
+		}
+
+		$config->registerDefaultAssets();
+
 		$this->view = \Yii::$app->getView();
 		XEditableAsset::register($this->view);
-		$this->view->registerJs("$.fn.editable.defaults.mode = '$this->mode';");
 		$this->editable = Json::encode($this->editable);
 		$this->view->registerJs('$(".editable").editable(' . $this->editable . ');');
 	}
