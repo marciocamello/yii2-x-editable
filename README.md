@@ -27,6 +27,61 @@ Usage
 
 Once the extension is installed, simply use it in your code by :
 
+
+XEditable
+------------
+
 ```php
+
 <?= \mcms\xeditable\Xeditable::widget(); ?>
+
+```
+
+XEditableColumn with GridView
+------------
+
+```php
+
+<?php
+
+use mcms\xeditable\XEditable;
+use mcms\xeditable\XEditableColumn;
+use yii\grid\GridView;
+
+$provider = new \yii\data\ActiveDataProvider([
+	'query' => \app\models\Model::find(),
+]);
+
+echo GridView::widget([
+		 'id' => Yii::$app->controller->id,
+		 'dataProvider' => $provider,
+		 'columns' => [
+		 [
+			 'value'=>function($data) {
+
+					 if(empty($data->is_active))
+					 {
+						 return Yii::t('app','No');
+					 }
+
+					 return Yii::t('app','Yes');
+				 },
+			 'class' => XEditableColumn::className(),
+			 'dataType'=>'select',
+			 'editable'=>[
+				 'source'=>[
+					 ['value'=>1,
+						 'text'=>Yii::t('app','Yes')],
+					 ['value'=>0,
+						 'text'=>Yii::t('app','No')]
+				 ],
+			 ],
+			 'attribute' => 'status',
+			 'format' => 'raw',
+			 'filter' => ['1' => Yii::t('app', 'Yes'),'0' => Yii::t('app', 'No'),],
+			],
+	]
+]);
+?>
+
 ```
