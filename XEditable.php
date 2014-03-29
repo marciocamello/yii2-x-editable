@@ -1,4 +1,7 @@
 <?php
+/**
+ * @inheritdoc
+ */
 
 namespace mcms\xeditable;
 
@@ -7,10 +10,9 @@ use yii\web\View;
 
 class XEditable extends \yii\base\widget
 {
-    /**
-     * Initializes the widget
-     * @throw InvalidConfigException
-     */
+	/**
+	 * @inheritdoc
+	 */
     public function init()
     {
         parent::init();
@@ -22,9 +24,9 @@ class XEditable extends \yii\base\widget
         return '<a href="#" id="sex" data-type="select" data-pk="1" data-value="" data-title="Select gender" class="editable-click" style="color: gray;" data-original-title="" title="">not selected</a>';
     }
 
-    /**
-     * Registers the needed assets
-     */
+	/**
+	 * @inheritdoc
+	 */
     public function registerAssets()
     {
 		$this->view = \Yii::$app->getView();

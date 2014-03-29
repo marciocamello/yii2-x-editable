@@ -1,4 +1,7 @@
 <?php
+/**
+ * @inheritdoc
+ */
 
 namespace mcms\xeditable;
 
@@ -9,7 +12,7 @@ use yii\web\View;
 \Yii::setAlias('@xeditable', dirname(__FILE__));
 
 /**
- * Asset bundle for XEditable Widget
+ * @inheritdoc
  */
 class XEditableAsset extends AssetBundle
 {

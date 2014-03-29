@@ -1,4 +1,7 @@
 <?php
+/**
+ * @inheritdoc
+ */
 
 namespace mcms\xeditable;
 
@@ -11,6 +14,9 @@ class XEditableAction extends Action
 	public $modelclass;
 	public $scenario='';
 
+	/**
+	 * @inheritdoc
+	 */
 	public function run()
 	{
 		if(\Yii::$app->request->getIsPost()){

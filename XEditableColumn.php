@@ -1,9 +1,6 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: vov4ik08
- * Date: 05.03.14
- * Time: 08:58
+ * @inheritdoc
  */
 
 namespace mcms\xeditable;
@@ -59,7 +56,7 @@ class XEditableColumn extends DataColumn
 	}
 
 	/**
-	 * Registers the needed assets
+	 * @inheritdoc
 	 */
 	public function registerAssets()
 	{
