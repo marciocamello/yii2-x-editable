@@ -33,7 +33,13 @@ XEditable
 
 ```php
 
-<?= \mcms\xeditable\Xeditable::widget(); ?>
+<?php
+
+use mcms\xeditable\XEditable;
+
+echo Xeditable::widget(); 
+
+?>
 
 ```
 
@@ -44,7 +50,6 @@ XEditableColumn with GridView
 
 <?php
 
-use mcms\xeditable\XEditable;
 use mcms\xeditable\XEditableColumn;
 use yii\grid\GridView;
 
