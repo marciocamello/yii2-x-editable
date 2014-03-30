@@ -10,7 +10,7 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-php composer.phar require --prefer-dist marciocamello/yii2-x-editable "*"
+php composer.phar require marciocamello/yii2-x-editable "dev-master"
 ```
 
 or add
@@ -27,8 +27,7 @@ Usage
 
 Once the extension is installed, simply use it in your code by :
 
-
-XEditable
+XEditable NameSpace and Model params
 ------------
 
 ```php
