@@ -39,6 +39,23 @@ use mcms\xeditable\XEditable;
 $model = Model::find($id);
 
 ?>
+
+```
+
+Actions
+------------
+
+```
+	public function actions()
+	{
+		return [
+			'editable' => [
+				'class' => 'mcms\xeditable\XEditableAction',
+				//'scenario'=>'editable',  //optional
+				'modelclass' => Model::className(),
+			],
+		];
+	}
 ```
 
 Text
