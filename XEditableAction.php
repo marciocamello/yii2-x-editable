@@ -7,6 +7,7 @@
 namespace mcms\xeditable;
 
 use yii\base\Action;
+use yii\console\Response;
 use yii\helpers\VarDumper;
 use yii\web\NotFoundHttpException;
 
@@ -20,23 +21,22 @@ class XEditableAction extends Action
 	 */
 	public function run()
 	{
-		if(\Yii::$app->request->getIsPost()){
+		if (\Yii::$app->request->isAjax) {
 			$pk=$_POST['pk'];
 			$name=$_POST['name'];
-			$value=trim($_POST['value']);
+			$value=$_POST['value'];
+
 			$modelclass=$this->modelclass;
 			$model= $modelclass::find($pk);
 			if($this->scenario){
 				$model->setScenario($this->scenario);
 			}
-			if($model===null)
-				throw new NotFoundHttpException();
-			$model->$name = $value;
-			if ($model->validate()){
-				$model->update();
-			}else{
-				VarDumper::dump($model->getErrors(),10);
-			}
+
+			XEditable::saveAction([
+				'name' => $name,
+				'value' => $value,
+				'model' => $model,
+			]);
 		}
 	}
 }

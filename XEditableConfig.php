@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Xeditable class file.
+ *
+ * @author Marcio Camello <marciocamello@outlook.com>
+ * @link http://
+ * @copyright Copyright &copy; Marcio Camello 2014
+ * @version 1.5.1
+ */
+
 namespace mcms\xeditable;
 
 use yii\bootstrap\BootstrapAsset;
@@ -8,7 +17,6 @@ use yii\web\View;
 
 class XEditableConfig extends \yii\base\widget
 {
-    const FORM_BOOTSTRAP2 = 'bootstrap';
 	const FORM_BOOTSTRAP3 = 'bootstrap3';
     const FORM_JQUERYUI = 'jqueryui';
     const FORM_PLAIN = 'plain';
@@ -32,10 +40,9 @@ class XEditableConfig extends \yii\base\widget
     public $defaults = array();
 
     /**
-    * initializes editable component and sets defaults
+    * @see register default assets for extension
     *
     */
-
 	public function registerDefaultAssets()
 	{
 		parent::init();
@@ -52,6 +59,12 @@ class XEditableConfig extends \yii\base\widget
 		if($.fn.editable)
 		$.extend(
 			$.fn.editable.defaults , $defaults);
+			/*$.fn.editable.defaults.ajaxOptions = {
+				type: 'post',
+				success:function(data){
+					alert(data);
+				}
+			}*/
 		");
 	}
 }
