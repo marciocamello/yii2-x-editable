@@ -58,23 +58,76 @@ Actions
 	}
 ```
 
-Text
+Text whitout model
 ------------
 
 ```
 <?php
 
 echo XEditable::widget([
-	'id' => 'text-editable',
-	'pluginOptions' => [
-		'type' => 'text',
-		'name' => 'title',
-		'value' => $model->title,
-		'url' => 'editable',
-		'pk' => $model->id,
-	]
-]); ?>
+	'value' => 'With Xeditable'
+]);
 
+echo '<br>';
+
+echo \mcms\xeditable\XEditableText::widget([
+	'value' => 'With XEditableText'
+]);
+
+?>
+```
+
+Text
+------------
+
+```
+<?php
+
+echo \mcms\xeditable\XEditableText::widget([
+	'model' => $model,
+	'placement' => 'right',
+	'pluginOptions' => [
+		'name' => 'title',
+	],
+	'callbacks' => [
+		'validate' => new \yii\web\JsExpression('
+			function(value) {
+				if($.trim(value) == "") {
+					return "This field is required";
+				}
+			}
+		')
+	]
+]);
+
+?>
+```
+
+Text Toggle Manual
+------------
+
+```
+<?php
+
+echo \mcms\xeditable\XEditableText::widget([
+	'model' => $model,
+	'placement' => 'right',
+	'pluginOptions' => [
+		'toggle' => 'manual',
+		'name' => 'title',
+	],
+	'callbacks' => [
+		'validate' => new \yii\web\JsExpression('
+			function(value) {
+				if($.trim(value) == "") {
+					return "This field is required";
+				}
+			}
+		')
+	]
+]);
+
+?>
 ```
 
 TextArea
@@ -83,18 +136,15 @@ TextArea
 ```
 <?php
 
-echo XEditable::widget([
-	'id' => 'textarea-editable',
+echo \mcms\xeditable\XEditableTextArea::widget([
+	'model' => $model,
+	'placement' => 'right',
 	'pluginOptions' => [
-		'type' => 'textarea',
 		'name' => 'content',
-		'value' => $model->content,
-		'row' => 10,
-		'url' => 'editable',
-		'pk' => $model->id,
-	]
-]); ?>
+	],
+]);
 
+?>
 ```
 
 Select
@@ -103,47 +153,19 @@ Select
 ```
 <?php
 
-echo XEditable::widget([
-	'id' => 'select-editable',
+echo \mcms\xeditable\XEditableSelect::widget([
+	'model' => $model,
+	'placement' => 'right',
 	'pluginOptions' => [
-		'type' => 'select',
 		'name' => 'status',
-		'value' => $model->status,
 		'source'=>[
 			['value'=>1,
 				'text'=>Yii::t('app','On')],
 			['value'=>0,
 				'text'=>Yii::t('app','Off')]
 		],
-		'url' => 'editable',
-		'pk' => $model->id,
-	]
+	],
 ]); ?>
-```
-
-CheckList
-------------
-
-```
-<?php
-
-echo XEditable::widget([
-	'id' => 'checklist-editable',
-	'pluginOptions' => [
-		'type' => 'checklist',
-		'name' => 'status',
-		'value' => $model->status,
-		'source'=>[
-			['value'=>0,
-				'text'=>Yii::t('app','option1')],
-			['value'=>1,
-				'text'=>Yii::t('app','option2')],
-			['value'=>2,
-				'text'=>Yii::t('app','option3')]
-		],
-	]
-]); ?>
-
 ```
 
 Date
@@ -152,19 +174,19 @@ Date
 ```
 <?php
 
-echo XEditable::widget([
-	'id' => 'date-editable',
+echo \mcms\xeditable\XEditableDate::widget([
+	'model' => $model,
+	'placement' => 'right',
 	'pluginOptions' => [
-		'type' => 'date',
-		'name' => 'create_at',
+		'name' => 'created_at',
 		'value' => date('Y-m-d',$model->created_at),
 		'format' => 'yyyy-mm-dd',
-        'viewformat' => 'dd/mm/yyyy',
+		'viewformat' => 'dd/mm/yyyy',
 		'datepicker' => [
 			[
 				'weekStart' => 1
 			]
-        ],
+		],
 	]
 ]); ?>
 ```
@@ -175,21 +197,130 @@ DateTime
 ```
 <?php
 
-echo XEditable::widget([
-	'id' => 'datetime-editable',
+echo \mcms\xeditable\XEditableDateTime::widget([
+	'model' => $model,
+	'placement' => 'right',
 	'pluginOptions' => [
-		'type' => 'datetime',
-		'name' => 'create_at',
+		'name' => 'created_at',
 		'value' => date('Y-m-d h:i',$model->created_at),
 		'format' => 'yyyy-mm-dd hh:ii',
 		'viewformat' => 'dd/mm/yyyy hh:ii',
-		'datetimepicker' => [
+		'datepicker' => [
 			[
 				'weekStart' => 1
 			]
 		],
 	]
 ]); ?>
+```
+
+ComboDate
+------------
+
+```
+<?php
+
+echo \mcms\xeditable\XEditableComboDate::widget([
+	'model' => $model,
+	'placement' => 'right',
+	'type' => 'combodate',
+	'pluginOptions' => [
+		'name' => 'created_at',
+		'value' => date('Y-m-d h:i',$model->created_at),
+		'format'      => 'YYYY-MM-DD HH:mm',
+		'viewformat'  => 'MMM DD, YYYY HH:mm',
+		'template'    => 'DD / MMM / YYYY HH:mm',
+		'combodate' => [
+			[
+				'minYear' => '2000',
+				'maxYear' => '2015',
+				'minuteStep' => '1'
+			]
+		],
+	]
+]); ?>
+```
+
+Checklist
+------------
+
+```
+<?php
+
+echo \mcms\xeditable\XEditableCheckList::widget([
+	'model' => $model,
+	'placement' => 'right',
+	'pluginOptions' => [
+		'name' => 'image',
+		'source'=>[
+			['value'=>'option1',
+				'text'=>Yii::t('app','option1')],
+			['value'=>'option2',
+				'text'=>Yii::t('app','option2')],
+			['value'=>'option3',
+				'text'=>Yii::t('app','option3')]
+		],
+	],
+]); ?>
+
+```
+
+HTML Editor - WysiHtml5
+------------
+
+```
+<?php
+
+echo \mcms\xeditable\XEditableWysiHtml5::widget([
+	'type' => 'wysihtml5',
+	'model' => $model,
+	'pluginOptions' => [
+		'toggle' => 'manual',
+		'name' => 'content',
+		'title' => 'Enter comments',
+	],
+]); ?>
+```
+
+DataGrid
+------------
+
+```
+<?php
+$provider = new \yii\data\ActiveDataProvider([
+	'query' => \backend\modules\cms\models\Categories::find(),
+	'pagination' => [
+		'pageSize' => 4,
+	],
+]);
+
+echo GridView::widget([
+	'id' => Yii::$app->controller->id,
+	'dataProvider' => $provider,
+	'columns' => [
+		[
+			'value'=>function($model) {
+				return $model->active;
+			},
+			'class' => \mcms\xeditable\XEditableColumn::className(),
+			'url' => 'editable',
+			'dataType'=>'select',
+			'editable'=>[
+				'source'=>[
+					['value'=>1,
+						'text'=>Yii::t('app','On')],
+					['value'=>0,
+						'text'=>Yii::t('app','Off')]
+				],
+				'placement' => 'right',
+			],
+			'attribute' => 'status',
+			'format' => 'raw',
+		],
+		'title',
+	]
+]);
+?>
 ```
 
 Select2
@@ -208,125 +339,42 @@ $items = [
 ];
 
 echo XEditable::widget([
-	'id' => 'select2-editable',
+	'placement' => 'right',
+	'type' => 'select2',
 	'pluginOptions' => [
-		'type' => 'select2',
 		'value' => 'ru',
 		'source'=> $items,
 		'select2' => [
 			'multiple' => true
-		]
-	]
-]); ?>
-```
-
-ComboDate
-------------
-
-```
-<?php
-
-echo XEditable::widget([
-	'id' => 'combodate-editable',
-	'pluginOptions' => [
-		'type' => 'combodate',
-		'name' => 'create_at',
-		'value' => date('Y-M-D',$model->created_at),
-		'format' => 'YYYY-MM-DD',
-		'viewformat' => 'DD.MM.YYYY',
-		'template' => 'D / MMMM / YYYY',
-		'combodate' => [
-			[
-				'minYear' => '2000',
-                'maxYear' => '2015',
-                'minuteStep' => '1'
-			]
-		],
-		'pk' => $model->id,
-	]
-]); ?>
-```
-
-ComboDateTime
-------------
-
-```
-<?php
-
-echo XEditable::widget([
-	'id' => 'combodatetime-editable',
-	'pluginOptions' => [
-		'type' => 'combodate',
-		'name' => 'create_at',
-		'value' => date('Y-M-D  HH:mm',$model->created_at),
-		'format' => 'YYYY-MM-DD HH:mm',
-		'viewformat' => 'DD.MM.YYYY HH:mm',
-		'template' => 'D / MMMM / YYYY / HH:mm',
-		'combodate' => [
-			[
-				'firstItem' => 'name',
-			]
 		],
 	]
 ]); ?>
 ```
 
-HTML Editor - WysiHtml5
+TypeAheadJs
 ------------
 
 ```
 <?php
+
+$items = [
+	['value'=>'gb',
+		'text'=>Yii::t('app','Great Britain')],
+	['value'=>'us',
+		'text'=>Yii::t('app','United States')],
+	['value'=>'ru',
+		'text'=>Yii::t('app','Russia')]
+];
 
 echo XEditable::widget([
-	'id' => 'wysihtml5-editable',
+	'placement' => 'right',
+	'type' => 'typeaheadjs',
 	'pluginOptions' => [
-		'type' => 'wysihtml5',
-		'value' => 'Enter comments',
-		'title' => 'Enter comments',
+		'value' => 'ru',
+		'typeahead' => [
+			'name' => 'country',
+			'local' => $items,
+		],
 	]
 ]); ?>
-
-```
-
-GridView Column Editable
-------------
-
-```php
-
-<?php
-
-use mcms\xeditable\XEditableColumn;
-use yii\grid\GridView;
-
-$provider = new \yii\data\ActiveDataProvider([
-	'query' => \app\models\Model::find(),
-]);
-
-echo GridView::widget([
-	'id' => Yii::$app->controller->id,
-	'dataProvider' => $provider,
-	'columns' => [
-		[
-			'value'=>function($model) {
-					return $model->active;
-				},
-			'class' => XEditableColumn::className(),
-			'url' => 'editable',
-			'dataType'=>'select',
-			'editable'=>[
-				'source'=>[
-					['value'=>1,
-						'text'=>Yii::t('app','On')],
-					['value'=>0,
-						'text'=>Yii::t('app','Off')]
-				],
-			],
-			'attribute' => 'status',
-			'format' => 'raw',
-		],
-		'title',
-	]
-]);
-?>
-
 ```
