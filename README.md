@@ -1,6 +1,7 @@
 MCMS X-Editable
 ===============
 X-editable extensions for Yii 2, based in X-editable 1.5.1 with Bootstrap 3
+Link from project - http://vitalets.github.io/x-editable/
 
 Installation
 ------------
