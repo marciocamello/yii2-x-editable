@@ -10,7 +10,7 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-php composer.phar require --prefer-dist marciocamello/yii2-x-editable "*"
+php composer.phar require marciocamello/yii2-x-editable "dev-master"
 ```
 
 or add
@@ -27,8 +27,7 @@ Usage
 
 Once the extension is installed, simply use it in your code by :
 
-
-XEditable
+XEditable NameSpace and Model params
 ------------
 
 ```php
@@ -37,13 +36,259 @@ XEditable
 
 use mcms\xeditable\XEditable;
 
-echo Xeditable::widget(); 
+$model = Model::find($id);
 
 ?>
 
 ```
 
-XEditableColumn with GridView
+Actions
+------------
+
+```
+	public function actions()
+	{
+		return [
+			'editable' => [
+				'class' => 'mcms\xeditable\XEditableAction',
+				//'scenario'=>'editable',  //optional
+				'modelclass' => Model::className(),
+			],
+		];
+	}
+```
+
+Text
+------------
+
+```
+<?php
+
+echo XEditable::widget([
+	'id' => 'text-editable',
+	'pluginOptions' => [
+		'type' => 'text',
+		'name' => 'title',
+		'value' => $model->title,
+		'url' => 'editable',
+		'pk' => $model->id,
+	]
+]); ?>
+
+```
+
+TextArea
+------------
+
+```
+<?php
+
+echo XEditable::widget([
+	'id' => 'textarea-editable',
+	'pluginOptions' => [
+		'type' => 'textarea',
+		'name' => 'content',
+		'value' => $model->content,
+		'row' => 10,
+		'url' => 'editable',
+		'pk' => $model->id,
+	]
+]); ?>
+
+```
+
+Select
+------------
+
+```
+<?php
+
+echo XEditable::widget([
+	'id' => 'select-editable',
+	'pluginOptions' => [
+		'type' => 'select',
+		'name' => 'status',
+		'value' => $model->status,
+		'source'=>[
+			['value'=>1,
+				'text'=>Yii::t('app','On')],
+			['value'=>0,
+				'text'=>Yii::t('app','Off')]
+		],
+		'url' => 'editable',
+		'pk' => $model->id,
+	]
+]); ?>
+```
+
+CheckList
+------------
+
+```
+<?php
+
+echo XEditable::widget([
+	'id' => 'checklist-editable',
+	'pluginOptions' => [
+		'type' => 'checklist',
+		'name' => 'status',
+		'value' => $model->status,
+		'source'=>[
+			['value'=>0,
+				'text'=>Yii::t('app','option1')],
+			['value'=>1,
+				'text'=>Yii::t('app','option2')],
+			['value'=>2,
+				'text'=>Yii::t('app','option3')]
+		],
+	]
+]); ?>
+
+```
+
+Date
+------------
+
+```
+<?php
+
+echo XEditable::widget([
+	'id' => 'date-editable',
+	'pluginOptions' => [
+		'type' => 'date',
+		'name' => 'create_at',
+		'value' => date('Y-m-d',$model->created_at),
+		'format' => 'yyyy-mm-dd',
+        'viewformat' => 'dd/mm/yyyy',
+		'datepicker' => [
+			[
+				'weekStart' => 1
+			]
+        ],
+	]
+]); ?>
+```
+
+DateTime
+------------
+
+```
+<?php
+
+echo XEditable::widget([
+	'id' => 'datetime-editable',
+	'pluginOptions' => [
+		'type' => 'datetime',
+		'name' => 'create_at',
+		'value' => date('Y-m-d h:i',$model->created_at),
+		'format' => 'yyyy-mm-dd hh:ii',
+		'viewformat' => 'dd/mm/yyyy hh:ii',
+		'datetimepicker' => [
+			[
+				'weekStart' => 1
+			]
+		],
+	]
+]); ?>
+```
+
+Select2
+------------
+
+```
+<?php
+
+$items = [
+	['value'=>'gb',
+		'text'=>Yii::t('app','Great Britain')],
+	['value'=>'us',
+		'text'=>Yii::t('app','United States')],
+	['value'=>'ru',
+		'text'=>Yii::t('app','Russia')]
+];
+
+echo XEditable::widget([
+	'id' => 'select2-editable',
+	'pluginOptions' => [
+		'type' => 'select2',
+		'value' => 'ru',
+		'source'=> $items,
+		'select2' => [
+			'multiple' => true
+		]
+	]
+]); ?>
+```
+
+ComboDate
+------------
+
+```
+<?php
+
+echo XEditable::widget([
+	'id' => 'combodate-editable',
+	'pluginOptions' => [
+		'type' => 'combodate',
+		'name' => 'create_at',
+		'value' => date('Y-M-D',$model->created_at),
+		'format' => 'YYYY-MM-DD',
+		'viewformat' => 'DD.MM.YYYY',
+		'template' => 'D / MMMM / YYYY',
+		'combodate' => [
+			[
+				'minYear' => '2000',
+                'maxYear' => '2015',
+                'minuteStep' => '1'
+			]
+		],
+		'pk' => $model->id,
+	]
+]); ?>
+```
+
+ComboDateTime
+------------
+
+```
+<?php
+
+echo XEditable::widget([
+	'id' => 'combodatetime-editable',
+	'pluginOptions' => [
+		'type' => 'combodate',
+		'name' => 'create_at',
+		'value' => date('Y-M-D  HH:mm',$model->created_at),
+		'format' => 'YYYY-MM-DD HH:mm',
+		'viewformat' => 'DD.MM.YYYY HH:mm',
+		'template' => 'D / MMMM / YYYY / HH:mm',
+		'combodate' => [
+			[
+				'firstItem' => 'name',
+			]
+		],
+	]
+]); ?>
+```
+
+HTML Editor - WysiHtml5
+------------
+
+```
+<?php
+
+echo XEditable::widget([
+	'id' => 'wysihtml5-editable',
+	'pluginOptions' => [
+		'type' => 'wysihtml5',
+		'value' => 'Enter comments',
+		'title' => 'Enter comments',
+	]
+]); ?>
+
+```
+
+GridView Column Editable
 ------------
 
 ```php
@@ -58,33 +303,28 @@ $provider = new \yii\data\ActiveDataProvider([
 ]);
 
 echo GridView::widget([
-		 'id' => Yii::$app->controller->id,
-		 'dataProvider' => $provider,
-		 'columns' => [
-		 [
-			 'value'=>function($data) {
-
-					 if(empty($data->is_active))
-					 {
-						 return Yii::t('app','No');
-					 }
-
-					 return Yii::t('app','Yes');
-				 },
-			 'class' => XEditableColumn::className(),
-			 'dataType'=>'select',
-			 'editable'=>[
-				 'source'=>[
-					 ['value'=>1,
-						 'text'=>Yii::t('app','Yes')],
-					 ['value'=>0,
-						 'text'=>Yii::t('app','No')]
-				 ],
-			 ],
-			 'attribute' => 'status',
-			 'format' => 'raw',
-			 'filter' => ['1' => Yii::t('app', 'Yes'),'0' => Yii::t('app', 'No'),],
+	'id' => Yii::$app->controller->id,
+	'dataProvider' => $provider,
+	'columns' => [
+		[
+			'value'=>function($model) {
+					return $model->active;
+				},
+			'class' => XEditableColumn::className(),
+			'url' => 'editable',
+			'dataType'=>'select',
+			'editable'=>[
+				'source'=>[
+					['value'=>1,
+						'text'=>Yii::t('app','On')],
+					['value'=>0,
+						'text'=>Yii::t('app','Off')]
+				],
 			],
+			'attribute' => 'status',
+			'format' => 'raw',
+		],
+		'title',
 	]
 ]);
 ?>
