@@ -25,7 +25,7 @@ class XEditableAction extends Action
 			$name=$_POST['name'];
 			$value=trim($_POST['value']);
 			$modelclass=$this->modelclass;
-			$model= $modelclass::find($pk);
+			$model= $modelclass::findOne($pk);
 			if($this->scenario){
 				$model->setScenario($this->scenario);
 			}

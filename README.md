@@ -36,7 +36,7 @@ XEditable NameSpace and Model params
 
 use mcms\xeditable\XEditable;
 
-$model = Model::find($id);
+$model = Model::findOne($id);
 
 ?>
 
