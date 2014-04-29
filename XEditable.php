@@ -12,7 +12,7 @@ use yii\helpers\Json;
 use yii\helpers\ArrayHelper;
 use yii\web\View;
 
-class XEditable extends \yii\base\widget
+class XEditable extends \yii\base\Widget
 {
 	/**
 	 * @var array defaults for editable configuration
