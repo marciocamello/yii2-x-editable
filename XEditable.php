@@ -20,7 +20,7 @@ use yii\helpers\VarDumper;
 use yii\web\NotFoundHttpException;
 use yii\web\View;
 
-class XEditable extends \yii\base\widget
+class XEditable extends \yii\base\Widget
 {
 
 	/**
