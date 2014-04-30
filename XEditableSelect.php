@@ -90,6 +90,21 @@ class XEditableSelect extends XEditable
 	 */
 	public  $tpl = '<select></select>';
 
-
+    /**
+     * ```
+     * <?= $form->field($model, 'status')->widget(\mcms\xeditable\XEditableSelect::className(),[
+     * 'model' => $model,
+     * 'placement' => 'right',
+     * 'pluginOptions' => [
+     * 'name' => 'status',
+     * 'source'=>[
+     * ['value'=>1,'text'=>Yii::t('app','On')],
+     * ['value'=>0,'text'=>Yii::t('app','Off')]],
+     * ],]) ?>
+     * ```
+     * using for ActiveFormFields
+     * @var string
+     */
+    public $attribute;
 
 }
