@@ -498,7 +498,7 @@ class XEditable extends \yii\base\Widget
 		 * @see Xeditable
 		 * @see set default url
 		 */
-		$this->url = 'editable';
+		$this->url = $this->url ? $this->url : 'editable';
 
 		/**
 		 * @see Xeditable
@@ -524,7 +524,7 @@ class XEditable extends \yii\base\Widget
 			$name = $this->pluginOptions['name'];
 
 			$this->paramsOptions['model'] = [
-				'url' => 'editable',
+				'url' => $this->url,
 				'value' => $this->model->$name,
 				'pk' => $this->model->id,
 			];
