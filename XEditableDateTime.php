@@ -99,7 +99,16 @@ class XEditableDateTime extends XEditable
 	 */
 	public function registerAssets()
 	{
-		DateTimePickerAsset::register($this->view);
+###################################################################                
+//add i18n surpporting
+                if(isset($this->pluginOptions['datetimepicker'])){                        
+                    $datetimepicker_json=  json_decode($this->pluginOptions['datetimepicker']);
+                    if(isset($datetimepicker_json->language)){
+                        EditableAsset::register($this->view)->js[]='bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.'.$datetimepicker_json->language.'.js';
+                    }
+                }
+########################################################################               
+//		DateTimePickerAsset::register($this->view);//because the bootstrap-datetimepicker.js file has benn included in bootstrap-editable.(min.) js，so this is no requirment
 	}
 
 }
