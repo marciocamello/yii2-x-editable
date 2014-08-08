@@ -80,7 +80,7 @@ class XEditableColumn extends DataColumn
 		$this->view = \Yii::$app->getView();
 		XEditableAsset::register($this->view);
 		$this->editable = Json::encode($this->editable);
-		$this->view->registerJs('$(".editable").editable(' . $this->editable . ');');
+		$this->view->registerJs('$(".editable[data-name=' . $this->attribute . ']").editable(' . $this->editable . ');');
 	}
 
 } 
